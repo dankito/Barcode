@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">QRCode</string>
 
+    <string name="tab_title_read">Read</string>
     <string name="tab_title_generate">Generate</string>
 
     <string name="generate">Generate</string>
