@@ -11,8 +11,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import net.dankito.qrcode.R;
+import net.dankito.qrcode.adapter.BarcodeTypeSpinnerAdapter;
 import net.dankito.qrcode.util.BarcodeGenerateOptions;
 import net.dankito.qrcode.util.BarcodeGenerator;
 import net.dankito.qrcode.util.BarcodeType;
@@ -29,6 +31,8 @@ public class GenerateBarcodeFragment extends Fragment {
 
   protected EditText edtxtTextToEncode;
 
+  protected Spinner spnBarcodeType;
+
 
   @Nullable
   @Override
@@ -40,16 +44,33 @@ public class GenerateBarcodeFragment extends Fragment {
     edtxtTextToEncode = (EditText)view.findViewById(R.id.edtxtTextToEncode);
     edtxtTextToEncode.clearFocus();
 
+    spnBarcodeType = (Spinner)view.findViewById(R.id.spnBarcodeType);
+    spnBarcodeType.setAdapter(new BarcodeTypeSpinnerAdapter(getActivity()));
+    spnBarcodeType.setSelection(getIndexOfDefaultBarcodeType());
+
     Button btnGenerateBarcode = (Button)view.findViewById(R.id.btnGenerateBarcode);
     btnGenerateBarcode.setOnClickListener(btnGenerateBarcodeClickListener);
 
     return view;
   }
 
+  protected int getIndexOfDefaultBarcodeType() {
+    BarcodeType defaultType = BarcodeType.QR_CODE;
+    BarcodeType[] barcodeTypes = BarcodeType.values();
+
+    for(int i = 0; i < barcodeTypes.length; i++) {
+      if(defaultType.equals(barcodeTypes[i])) {
+        return i;
+      }
+    }
+
+    return 0;
+  }
 
 
   protected void generateBarcode() {
-    BarcodeGenerateOptions options = new BarcodeGenerateOptions(edtxtTextToEncode.getText().toString(), BarcodeType.QR_CODE);
+    BarcodeType barcodeType = (BarcodeType)spnBarcodeType.getSelectedItem();
+    BarcodeGenerateOptions options = new BarcodeGenerateOptions(edtxtTextToEncode.getText().toString(), barcodeType);
     imgGeneratedBarcode.setImageBitmap(barcodeGenerator.generateQRCode(options));
 
     hideSoftKeyboard();
