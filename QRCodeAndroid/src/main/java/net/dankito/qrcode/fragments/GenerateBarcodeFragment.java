@@ -49,7 +49,7 @@ public class GenerateBarcodeFragment extends Fragment {
 
 
   protected void generateBarcode() {
-    BarcodeGenerateOptions options = new BarcodeGenerateOptions(edtxtTextToEncode.getText().toString(), BarcodeType.QRCode);
+    BarcodeGenerateOptions options = new BarcodeGenerateOptions(edtxtTextToEncode.getText().toString(), BarcodeType.QR_CODE);
     imgGeneratedBarcode.setImageBitmap(barcodeGenerator.generateQRCode(options));
 
     hideSoftKeyboard();
