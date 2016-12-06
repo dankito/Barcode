@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+
+    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/tab_fragment_margins"
+                    android:layout_marginRight="@dimen/tab_fragment_margins"
+        >
+
+        <ImageView
+            android:id="@+id/imgGeneratedBarcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/edtxtTextToEncode"
+        />
+
+        <EditText
+            android:id="@+id/edtxtTextToEncode"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragment_generate_barcode_text_to_encode_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/btnGenerateBarcode"
+        />
+
+        <Button
+            android:id="@+id/btnGenerateBarcode"
+            android:layout_width="@dimen/fragment_generate_barcode_button_generate_width"
+            android:layout_height="@dimen/fragment_generate_barcode_button_generate_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="@string/generate"
+        />
+
+    </RelativeLayout>
+
+</ScrollView>

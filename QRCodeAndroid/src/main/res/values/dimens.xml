@@ -5,8 +5,15 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
+    <dimen name="tab_fragment_margins">6dp</dimen>
+
     <dimen name="fragment_read_barcode_button_read_width">140dp</dimen>
     <dimen name="fragment_read_barcode_button_read_height">50dp</dimen>
     <dimen name="fragment_read_barcode_decoded_text_padding">8dp</dimen>
     <dimen name="fragment_read_barcode_decoded_text_size">24sp</dimen>
+
+    <dimen name="fragment_generate_barcode_text_to_encode_height">150dp</dimen>
+    <dimen name="fragment_generate_barcode_text_to_encode_text_size">24sp</dimen>
+    <dimen name="fragment_generate_barcode_button_generate_width">150dp</dimen>
+    <dimen name="fragment_generate_barcode_button_generate_height">60dp</dimen>
 </resources>
