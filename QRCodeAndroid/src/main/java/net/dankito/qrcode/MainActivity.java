@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,11 +16,6 @@ import net.dankito.qrcode.adapter.MainActivityTabsAdapter;
 import net.dankito.qrcode.fragments.ReadBarcodeFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-  /**
-   * The {@link ViewPager} that will host the section contents.
-   */
-  private ViewPager mViewPager;
 
   protected MainActivityTabsAdapter mainActivityTabsAdapter;
 
@@ -34,10 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
     mainActivityTabsAdapter = new MainActivityTabsAdapter(this);
 
-    // Set up the ViewPager with the sections adapter.
-    mViewPager = (ViewPager) findViewById(R.id.container);
-    mViewPager.setAdapter(mainActivityTabsAdapter);
+    ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+    viewPager.setAdapter(mainActivityTabsAdapter);
 
+    TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayout);
+    tabLayout.setupWithViewPager(viewPager);
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
