@@ -1,5 +1,6 @@
 package net.dankito.qrcode.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import net.dankito.qrcode.R;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by ganymed on 06/12/16.
@@ -38,6 +42,21 @@ public class ReadBarcodeFragment extends Fragment {
 
   protected void startBarcodeReading() {
     new IntentIntegrator(getActivity()).setOrientationLocked(false).initiateScan();
+  }
+
+  public boolean handlesActivityResult(int requestCode, int resultCode, Intent data) {
+    if(resultCode == RESULT_OK) {
+      IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+      if(result != null) {
+        retrievedBarcodeScanningResults(result.getContents(), result.getFormatName(), result.getBarcodeImagePath());
+      }
+    }
+
+    return false;
+  }
+
+  protected void retrievedBarcodeScanningResults(String contents, String formatName, String barcodeImagePath) {
+    edtxtDecodedBarcode.setText(contents);
   }
 
 

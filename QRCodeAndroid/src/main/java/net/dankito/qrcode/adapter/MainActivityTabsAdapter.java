@@ -56,4 +56,9 @@ public class MainActivityTabsAdapter extends FragmentPagerAdapter {
     return null;
   }
 
+
+  public ReadBarcodeFragment getReadBarcodeFragment() {
+    return readBarcodeFragment;
+  }
+
 }

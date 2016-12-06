@@ -1,5 +1,6 @@
 package net.dankito.qrcode;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import net.dankito.qrcode.adapter.MainActivityTabsAdapter;
+import net.dankito.qrcode.fragments.ReadBarcodeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
    * The {@link ViewPager} that will host the section contents.
    */
   private ViewPager mViewPager;
+
+  protected MainActivityTabsAdapter mainActivityTabsAdapter;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
+    mainActivityTabsAdapter = new MainActivityTabsAdapter(this);
+
     // Set up the ViewPager with the sections adapter.
     mViewPager = (ViewPager) findViewById(R.id.container);
-    mViewPager.setAdapter(new MainActivityTabsAdapter(this));
+    mViewPager.setAdapter(mainActivityTabsAdapter);
 
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -66,4 +73,14 @@ public class MainActivity extends AppCompatActivity {
     return super.onOptionsItemSelected(item);
   }
 
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    ReadBarcodeFragment readBarcodeFragment = mainActivityTabsAdapter.getReadBarcodeFragment();
+    if(readBarcodeFragment != null && readBarcodeFragment.handlesActivityResult(requestCode, resultCode, data)) {
+
+    }
+
+    super.onActivityResult(requestCode, resultCode, data);
+  }
 }
