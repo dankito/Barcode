@@ -4,10 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Created by ganymed on 06/12/16.
@@ -18,10 +22,11 @@ public class BarcodeGenerator {
   public Bitmap generateQRCode(BarcodeGenerateOptions options) {
     BarcodeFormat barcodeFormat = getBarcodeFormat(options);
     Writer writer = createWriter(barcodeFormat);
+    Map<EncodeHintType, Object> hintMap = generateHints(options);
     BitMatrix matrix = null;
 
     try {
-      matrix = writer.encode(options.getTextToEncode(), barcodeFormat, options.getImageWidth(), options.getImageHeight());
+      matrix = writer.encode(options.getTextToEncode(), barcodeFormat, options.getImageWidth(), options.getImageHeight(), hintMap);
     } catch (WriterException ex) {
       ex.printStackTrace();
     }
@@ -51,6 +56,14 @@ public class BarcodeGenerator {
     }
 
     return null;
+  }
+
+  protected Map<EncodeHintType, Object> generateHints(BarcodeGenerateOptions options) {
+    Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
+
+    hintMap.put(EncodeHintType.CHARACTER_SET, options.getCharacterEncoding());
+
+    return hintMap;
   }
 
 }

@@ -10,6 +10,8 @@ public class BarcodeGenerateOptions {
 
   public static final int DEFAULT_IMAGE_WIDTH = 500;
 
+  public static final String DEFAULT_CHARACTER_ENCODING = "UTF-8";
+
 
   protected String textToEncode;
 
@@ -18,6 +20,8 @@ public class BarcodeGenerateOptions {
   protected int imageWidth = DEFAULT_IMAGE_WIDTH;
 
   protected int imageHeight = DEFAULT_IMAGE_HEIGHT;
+
+  protected String characterEncoding = DEFAULT_CHARACTER_ENCODING;
 
 
   public BarcodeGenerateOptions(String textToEncode, BarcodeType barcodeType) {
@@ -62,6 +66,14 @@ public class BarcodeGenerateOptions {
 
   public void setImageHeight(int imageHeight) {
     this.imageHeight = imageHeight;
+  }
+
+  public String getCharacterEncoding() {
+    return characterEncoding;
+  }
+
+  public void setCharacterEncoding(String characterEncoding) {
+    this.characterEncoding = characterEncoding;
   }
 
 
