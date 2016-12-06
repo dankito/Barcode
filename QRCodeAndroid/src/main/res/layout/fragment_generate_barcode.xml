@@ -31,7 +31,8 @@
             android:layout_alignParentRight="true"
             android:layout_above="@+id/btnGenerateBarcode"
             android:gravity="top"
-        />
+            android:selectAllOnFocus="true"
+            android:hint="@string/hint_enter_text_to_encode"/>
 
         <Button
             android:id="@+id/btnGenerateBarcode"

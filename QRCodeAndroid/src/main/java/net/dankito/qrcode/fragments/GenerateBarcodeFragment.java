@@ -37,6 +37,7 @@ public class GenerateBarcodeFragment extends Fragment {
     imgGeneratedBarcode = (ImageView)view.findViewById(R.id.imgGeneratedBarcode);
 
     edtxtTextToEncode = (EditText)view.findViewById(R.id.edtxtTextToEncode);
+    edtxtTextToEncode.clearFocus();
 
     Button btnGenerateBarcode = (Button)view.findViewById(R.id.btnGenerateBarcode);
     btnGenerateBarcode.setOnClickListener(btnGenerateBarcodeClickListener);
