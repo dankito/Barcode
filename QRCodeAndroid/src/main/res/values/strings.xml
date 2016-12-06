@@ -6,4 +6,6 @@
     <string name="tab_title_read">Read</string>
     <string name="tab_title_generate">Generate</string>
 
+    <string name="read">Read</string>
+
 </resources>
