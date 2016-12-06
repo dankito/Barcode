@@ -15,34 +15,42 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 public class BarcodeGenerator {
 
-  public static final int DEFAULT_IMAGE_HEIGHT = 500;
-
-  public static final int DEFAULT_IMAGE_WIDTH = 500;
-
-
-  public Bitmap generateQRCode(String textToEncode) {
-    return generateQRCode(textToEncode, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
-  }
-
-  public Bitmap generateQRCode(String textToEncode, int width, int height) {
-    Writer writer = new QRCodeWriter();
+  public Bitmap generateQRCode(BarcodeGenerateOptions options) {
+    BarcodeFormat barcodeFormat = getBarcodeFormat(options);
+    Writer writer = createWriter(barcodeFormat);
     BitMatrix matrix = null;
 
     try {
-      matrix = writer.encode(textToEncode, BarcodeFormat.QR_CODE, width, height);
+      matrix = writer.encode(options.getTextToEncode(), barcodeFormat, options.getImageWidth(), options.getImageHeight());
     } catch (WriterException ex) {
       ex.printStackTrace();
     }
 
-    Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-    for (int x = 0; x < width; x++){
-      for (int y = 0; y < height; y++){
-        bmp.setPixel(x, y, matrix.get(x,y) ? Color.BLACK : Color.WHITE);
+    Bitmap bitmap = Bitmap.createBitmap(options.getImageWidth(), options.getImageWidth(), Bitmap.Config.RGB_565);
+    for (int x = 0; x < options.getImageWidth(); x++){
+      for (int y = 0; y < options.getImageHeight(); y++){
+        bitmap.setPixel(x, y, matrix.get(x,y) ? Color.BLACK : Color.WHITE);
       }
     }
-    return bmp;
-
-//    return QRCode.from("Hello World").withCharset("UTF-8")
-//        .to(ImageType.PNG).bitmap();
+    return bitmap;
   }
+
+  protected Writer createWriter(BarcodeFormat barcodeFormat) {
+    switch(barcodeFormat) {
+      case QR_CODE:
+        return new QRCodeWriter();
+    }
+
+    return null;
+  }
+
+  protected BarcodeFormat getBarcodeFormat(BarcodeGenerateOptions options) {
+    switch(options.getBarcodeType()) {
+      case QRCode:
+        return BarcodeFormat.QR_CODE;
+    }
+
+    return null;
+  }
+
 }
