@@ -1,11 +1,14 @@
 package net.dankito.qrcode.fragments;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,7 +47,17 @@ public class GenerateBarcodeFragment extends Fragment {
 
 
   protected void generateBarcode() {
-    imgGeneratedBarcode.setImageBitmap(barcodeGenerator.generateQRCode(edtxtTextToEncode.getText().toString()));
+    Bitmap generatedBarcode = barcodeGenerator.generateQRCode(edtxtTextToEncode.getText().toString());
+    imgGeneratedBarcode.setImageBitmap(generatedBarcode);
+
+    hideSoftKeyboard();
+  }
+
+  protected void hideSoftKeyboard() {
+    if(edtxtTextToEncode != null) {
+      InputMethodManager imm = (InputMethodManager) edtxtTextToEncode.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+      imm.hideSoftInputFromWindow(edtxtTextToEncode.getWindowToken(), 0);
+    }
   }
 
 
