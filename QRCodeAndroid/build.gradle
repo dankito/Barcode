@@ -20,6 +20,9 @@ android {
 }
 
 dependencies {
+    compile 'com.github.kenglxn.QRGen:android:2.2.0'
+    compile 'com.journeyapps:zxing-android-embedded:3.0.3@aar'
+
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support:design:25.0.1'
 
