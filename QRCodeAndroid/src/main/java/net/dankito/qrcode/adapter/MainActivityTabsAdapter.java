@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 
+import net.dankito.qrcode.R;
+
 /**
  * Created by ganymed on 06/12/16.
  */
@@ -33,6 +35,13 @@ public class MainActivityTabsAdapter extends FragmentPagerAdapter {
 
   @Override
   public CharSequence getPageTitle(int position) {
+    if(position == 0) {
+      return activity.getString(R.string.tab_title_read);
+    }
+    else if(position == 1) {
+      return activity.getString(R.string.tab_title_generate);
+    }
+
     return super.getPageTitle(position);
   }
 
