@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 
 import net.dankito.qrcode.R;
+import net.dankito.qrcode.fragments.GenerateBarcodeFragment;
 import net.dankito.qrcode.fragments.ReadBarcodeFragment;
 
 /**
@@ -19,6 +20,8 @@ public class MainActivityTabsAdapter extends FragmentPagerAdapter {
 
   protected ReadBarcodeFragment readBarcodeFragment = null;
 
+  protected GenerateBarcodeFragment generateBarcodeFragment = null;
+
 
   public MainActivityTabsAdapter(AppCompatActivity activity) {
     super(activity.getSupportFragmentManager());
@@ -29,7 +32,7 @@ public class MainActivityTabsAdapter extends FragmentPagerAdapter {
 
   @Override
   public int getCount() {
-    return 1;
+    return 2;
   }
 
   @Override
@@ -51,6 +54,12 @@ public class MainActivityTabsAdapter extends FragmentPagerAdapter {
         readBarcodeFragment = new ReadBarcodeFragment();
       }
       return readBarcodeFragment;
+    }
+    else if(position == 1) {
+      if(generateBarcodeFragment == null) {
+        generateBarcodeFragment = new GenerateBarcodeFragment();
+      }
+      return generateBarcodeFragment;
     }
 
     return null;
