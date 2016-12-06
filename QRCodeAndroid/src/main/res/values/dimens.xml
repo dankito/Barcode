@@ -12,7 +12,7 @@
     <dimen name="fragment_read_barcode_decoded_text_padding">8dp</dimen>
     <dimen name="fragment_read_barcode_decoded_text_size">24sp</dimen>
 
-    <dimen name="fragment_generate_barcode_text_to_encode_height">150dp</dimen>
+    <dimen name="fragment_generate_barcode_text_to_encode_height">100dp</dimen>
     <dimen name="fragment_generate_barcode_text_to_encode_text_size">24sp</dimen>
     <dimen name="fragment_generate_barcode_button_generate_width">150dp</dimen>
     <dimen name="fragment_generate_barcode_button_generate_height">60dp</dimen>
