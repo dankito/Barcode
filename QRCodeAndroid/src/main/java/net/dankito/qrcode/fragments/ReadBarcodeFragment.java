@@ -3,11 +3,11 @@ package net.dankito.qrcode.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -33,8 +33,8 @@ public class ReadBarcodeFragment extends Fragment {
 
     edtxtDecodedBarcode = (EditText)view.findViewById(R.id.edtxtDecodedBarcode);
 
-    Button btnReadBarcode = (Button)view.findViewById(R.id.btnReadBarcode);
-    btnReadBarcode.setOnClickListener(btnReadBarcodeClickListener);
+    FloatingActionButton fabReadBarcode = (FloatingActionButton) view.findViewById(R.id.fabReadBarcode);
+    fabReadBarcode.setOnClickListener(fabReadBarcodeClickListener);
 
     return view;
   }
@@ -60,7 +60,7 @@ public class ReadBarcodeFragment extends Fragment {
   }
 
 
-  protected View.OnClickListener btnReadBarcodeClickListener = new View.OnClickListener() {
+  protected View.OnClickListener fabReadBarcodeClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
       startBarcodeReading();

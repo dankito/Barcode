@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-    >
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
 
-    <Button
-        android:id="@+id/btnReadBarcode"
-        android:layout_width="@dimen/fragment_read_barcode_button_read_width"
-        android:layout_height="@dimen/fragment_read_barcode_button_read_height"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/read"
-    />
 
-    <EditText
-        android:id="@+id/edtxtDecodedBarcode"
-        android:layout_width="match_parent"
+    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+        >
+
+        <EditText
+            android:id="@+id/edtxtDecodedBarcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="top"
+            android:padding="@dimen/fragment_read_barcode_decoded_text_padding"
+            android:inputType="none"
+            android:textIsSelectable="true"
+            android:textSize="@dimen/fragment_read_barcode_decoded_text_size"
+            android:background="#0000FF"
+        />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabReadBarcode"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/btnReadBarcode"
-        android:gravity="top"
-        android:padding="@dimen/fragment_read_barcode_decoded_text_padding"
-        android:inputType="none"
-        android:textIsSelectable="true"
-        android:textSize="@dimen/fragment_read_barcode_decoded_text_size"
-    />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
