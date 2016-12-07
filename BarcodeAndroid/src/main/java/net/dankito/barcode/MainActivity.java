@@ -65,4 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
     super.onActivityResult(requestCode, resultCode, data);
   }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    ReadBarcodeFragment readBarcodeFragment = mainActivityTabsAdapter.getReadBarcodeFragment();
+    if(readBarcodeFragment != null) {
+      readBarcodeFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+  }
 }

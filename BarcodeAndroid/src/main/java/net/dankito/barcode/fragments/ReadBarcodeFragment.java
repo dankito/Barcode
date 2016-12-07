@@ -1,10 +1,14 @@
 package net.dankito.barcode.fragments;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,9 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class ReadBarcodeFragment extends Fragment {
+
+  protected static final int CAMERA_PERMISSION_REQUEST_CODE = 2703;
+
 
   protected EditText edtxtDecodedBarcode;
 
@@ -41,7 +48,9 @@ public class ReadBarcodeFragment extends Fragment {
 
 
   protected void startBarcodeReading() {
-    new IntentIntegrator(getActivity()).setOrientationLocked(false).initiateScan();
+    if(isCameraPermissionGranted()) {
+      new IntentIntegrator(getActivity()).setOrientationLocked(false).initiateScan();
+    }
   }
 
   public boolean handlesActivityResult(int requestCode, int resultCode, Intent data) {
@@ -66,5 +75,31 @@ public class ReadBarcodeFragment extends Fragment {
       startBarcodeReading();
     }
   };
+
+
+
+  protected boolean isCameraPermissionGranted() {
+    if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission.CAMERA },
+          CAMERA_PERMISSION_REQUEST_CODE);
+
+      return false; // permissions are asynchronously requested, so return false for now and wait for result in onRequestPermissionsResult()
+    }
+    else {
+      return true;
+    }
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    switch(requestCode) {
+      case CAMERA_PERMISSION_REQUEST_CODE: {
+        // If request is cancelled, the result arrays are empty.
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // permission was granted, yay!
+         startBarcodeReading();
+        }
+      }
+    }
+  }
 
 }
