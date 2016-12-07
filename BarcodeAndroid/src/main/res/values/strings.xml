@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Barcode</string>
+
+    <string name="tab_title_read">Read</string>
+    <string name="tab_title_generate">Generate</string>
+
+    <string name="generate">Generate</string>
+
+    <string name="hint_enter_text_to_encode">Enter text to encode</string>
+
+    <string name="error_title_could_not_generate_barcode">Could not generate barcode</string>
+
+</resources>
