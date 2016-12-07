@@ -7,54 +7,56 @@ package net.dankito.qrcode.util;
 public enum BarcodeType {
 
   /** Aztec 2D barcode format. */
-  AZTEC,
+  AZTEC("Aztec"),
 
   /** CODABAR 1D format. */
-  CODABAR,
+  CODABAR("CODABAR"),
 
   /** Code 39 1D format. */
-  CODE_39,
-
-  /** Code 93 1D format. */
-//  CODE_93,
+  CODE_39("Code 39"),
 
   /** Code 128 1D format. */
-  CODE_128,
+  CODE_128("Code 128"),
 
   /** Data Matrix 2D barcode format. */
-  DATA_MATRIX,
+  DATA_MATRIX("Data Matrix"),
 
   /** EAN-8 1D format. */
-  EAN_8,
+  EAN_8("EAN-8"),
 
   /** EAN-13 1D format. */
-  EAN_13,
+  EAN_13("EAN-13"),
 
   /** ITF (Interleaved Two of Five) 1D format. */
-  ITF,
-
-  /** MaxiCode 2D barcode format. */
-//  MAXICODE,
+  ITF("ITF (Interleaved Two of Five)"),
 
   /** PDF417 format. */
-  PDF_417,
+  PDF_417("PDF417"),
 
   /** QR Code 2D barcode format. */
-  QR_CODE,
-
-  /** RSS 14 */
-//  RSS_14,
-
-  /** RSS EXPANDED */
-//  RSS_EXPANDED,
+  QR_CODE("QR Code"),
 
   /** UPC-A 1D format. */
-  UPC_A,
-
-  /** UPC-E 1D format. */
-//  UPC_E,
+  UPC_A("UPC-A"),
 
   /** UPC/EAN extension format. Not a stand-alone format. */
-  UPC_EAN_EXTENSION
+  UPC_EAN_EXTENSION("UPC/EAN extension");
+
+
+  private String name;
+
+  BarcodeType(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+
+  @Override
+  public String toString() {
+    return getName();
+  }
 
 }
