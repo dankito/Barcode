@@ -15,7 +15,9 @@ import android.widget.Spinner;
 
 import net.dankito.qrcode.R;
 import net.dankito.qrcode.adapter.BarcodeTypeSpinnerAdapter;
+import net.dankito.qrcode.util.AlertHelper;
 import net.dankito.qrcode.util.BarcodeGenerateOptions;
+import net.dankito.qrcode.util.BarcodeGenerationResult;
 import net.dankito.qrcode.util.BarcodeGenerator;
 import net.dankito.qrcode.util.BarcodeType;
 
@@ -71,9 +73,17 @@ public class GenerateBarcodeFragment extends Fragment {
   protected void generateBarcode() {
     BarcodeType barcodeType = (BarcodeType)spnBarcodeType.getSelectedItem();
     BarcodeGenerateOptions options = new BarcodeGenerateOptions(edtxtTextToEncode.getText().toString(), barcodeType);
-    imgGeneratedBarcode.setImageBitmap(barcodeGenerator.generateQRCode(options));
 
-    hideSoftKeyboard();
+    BarcodeGenerationResult generationResult = barcodeGenerator.generateQRCode(options);
+
+    if(generationResult.isSuccessful()) {
+      imgGeneratedBarcode.setImageBitmap(generationResult.getGeneratedBarcode());
+      hideSoftKeyboard();
+    }
+    else {
+      imgGeneratedBarcode.setImageBitmap(null);
+      showBarcodeGenerationError(generationResult);
+    }
   }
 
   protected void hideSoftKeyboard() {
@@ -81,6 +91,10 @@ public class GenerateBarcodeFragment extends Fragment {
       InputMethodManager imm = (InputMethodManager) edtxtTextToEncode.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
       imm.hideSoftInputFromWindow(edtxtTextToEncode.getWindowToken(), 0);
     }
+  }
+
+  protected void showBarcodeGenerationError(BarcodeGenerationResult generationResult) {
+    AlertHelper.showErrorMessage(getActivity(), generationResult.getError(), getString(R.string.error_title_could_not_generate_barcode));
   }
 
 

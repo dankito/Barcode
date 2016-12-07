@@ -6,7 +6,6 @@ import android.graphics.Color;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.Writer;
-import com.google.zxing.WriterException;
 import com.google.zxing.aztec.AztecWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.datamatrix.DataMatrixWriter;
@@ -30,25 +29,25 @@ import java.util.Map;
 
 public class BarcodeGenerator {
 
-  public Bitmap generateQRCode(BarcodeGenerateOptions options) {
-    BarcodeFormat barcodeFormat = getBarcodeFormat(options);
-    Writer writer = createWriter(barcodeFormat);
-    Map<EncodeHintType, Object> hintMap = generateHints(options);
-    BitMatrix matrix = null;
-
+  public BarcodeGenerationResult generateQRCode(BarcodeGenerateOptions options) {
     try {
-      matrix = writer.encode(options.getTextToEncode(), barcodeFormat, options.getImageWidth(), options.getImageHeight(), hintMap);
-    } catch (WriterException ex) {
-      ex.printStackTrace();
-    }
+      BarcodeFormat barcodeFormat = getBarcodeFormat(options);
+      Writer writer = createWriter(barcodeFormat);
+      Map<EncodeHintType, Object> hintMap = generateHints(options);
 
-    Bitmap bitmap = Bitmap.createBitmap(options.getImageWidth(), options.getImageWidth(), Bitmap.Config.RGB_565);
-    for (int x = 0; x < options.getImageWidth(); x++){
-      for (int y = 0; y < options.getImageHeight(); y++){
-        bitmap.setPixel(x, y, matrix.get(x,y) ? Color.BLACK : Color.WHITE);
+      BitMatrix matrix = writer.encode(options.getTextToEncode(), barcodeFormat, options.getImageWidth(), options.getImageHeight(), hintMap);
+
+      Bitmap bitmap = Bitmap.createBitmap(options.getImageWidth(), options.getImageWidth(), Bitmap.Config.RGB_565);
+      for (int x = 0; x < options.getImageWidth(); x++){
+        for (int y = 0; y < options.getImageHeight(); y++){
+          bitmap.setPixel(x, y, matrix.get(x,y) ? Color.BLACK : Color.WHITE);
+        }
       }
+
+      return new BarcodeGenerationResult(bitmap);
+    } catch (Exception e) {
+      return new BarcodeGenerationResult(e.getLocalizedMessage());
     }
-    return bitmap;
   }
 
   protected Writer createWriter(BarcodeFormat barcodeFormat) {

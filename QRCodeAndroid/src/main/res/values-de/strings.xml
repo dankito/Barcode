@@ -8,4 +8,6 @@
 
     <string name="hint_enter_text_to_encode">Zu enkodierenden Text eingeben</string>
 
+    <string name="error_title_could_not_generate_barcode">Barcode konnte nicht erzeugt werden</string>
+
 </resources>
