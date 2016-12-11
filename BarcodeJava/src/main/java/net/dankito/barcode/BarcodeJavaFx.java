@@ -6,6 +6,8 @@ import net.dankito.barcode.localization.BarcodeJavaFxResources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,14 +33,18 @@ public class BarcodeJavaFx extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     try {
+      ResourceBundle resources = BarcodeJavaFxResources.generate();
+
       FXMLLoader loader = new FXMLLoader();
-      loader.setResources(BarcodeJavaFxResources.generate());
+      loader.setResources(resources);
       loader.setLocation(getClass().getClassLoader().getResource("dialogs/MainWindow.fxml"));
+
       Parent root = (Parent)loader.load();
 
       Scene scene = new Scene(root);
 
       stage.setScene(scene);
+      stage.setTitle(resources.getString("stage.title"));
 
       MainWindowController controller = (MainWindowController)loader.getController();
       controller.setStage(stage);
