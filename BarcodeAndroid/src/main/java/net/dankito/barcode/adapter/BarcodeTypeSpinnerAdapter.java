@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import net.dankito.barcode.BarcodeType;
 import net.dankito.barcode.R;
-import net.dankito.barcode.util.BarcodeType;
 
 /**
  * Created by ganymed on 07/12/16.

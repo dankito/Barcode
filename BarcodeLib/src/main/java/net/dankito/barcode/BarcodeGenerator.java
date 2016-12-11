@@ -1,7 +1,4 @@
-package net.dankito.barcode.util;
-
-import android.graphics.Bitmap;
-import android.graphics.Color;
+package net.dankito.barcode;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -27,7 +24,7 @@ import java.util.Map;
  * Created by ganymed on 06/12/16.
  */
 
-public class BarcodeGenerator {
+public abstract class BarcodeGenerator {
 
   public BarcodeGenerationResult generateQRCode(BarcodeGenerateOptions options) {
     try {
@@ -37,18 +34,15 @@ public class BarcodeGenerator {
 
       BitMatrix matrix = writer.encode(options.getTextToEncode(), barcodeFormat, options.getImageWidth(), options.getImageHeight(), hintMap);
 
-      Bitmap bitmap = Bitmap.createBitmap(options.getImageWidth(), options.getImageWidth(), Bitmap.Config.RGB_565);
-      for (int x = 0; x < options.getImageWidth(); x++){
-        for (int y = 0; y < options.getImageHeight(); y++){
-          bitmap.setPixel(x, y, matrix.get(x,y) ? Color.BLACK : Color.WHITE);
-        }
-      }
+      Object bitmap = createBitmap(options, matrix);
 
       return new BarcodeGenerationResult(bitmap);
     } catch (Exception e) {
       return new BarcodeGenerationResult(e.getLocalizedMessage());
     }
   }
+
+  protected abstract Object createBitmap(BarcodeGenerateOptions options, BitMatrix matrix);
 
   protected Writer createWriter(BarcodeFormat barcodeFormat) {
     switch(barcodeFormat) {

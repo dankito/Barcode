@@ -1,4 +1,4 @@
-package net.dankito.barcode.util;
+package net.dankito.barcode;
 
 /**
  * Created by ganymed on 07/12/16.

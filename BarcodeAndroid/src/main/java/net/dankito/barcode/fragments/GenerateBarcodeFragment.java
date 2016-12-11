@@ -1,6 +1,7 @@
 package net.dankito.barcode.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,13 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import net.dankito.barcode.BarcodeGenerateOptions;
+import net.dankito.barcode.BarcodeGenerationResult;
+import net.dankito.barcode.BarcodeGenerator;
+import net.dankito.barcode.BarcodeGeneratorAndroid;
+import net.dankito.barcode.BarcodeType;
 import net.dankito.barcode.R;
 import net.dankito.barcode.adapter.BarcodeTypeSpinnerAdapter;
 import net.dankito.barcode.util.AlertHelper;
-import net.dankito.barcode.util.BarcodeGenerateOptions;
-import net.dankito.barcode.util.BarcodeGenerationResult;
-import net.dankito.barcode.util.BarcodeGenerator;
-import net.dankito.barcode.util.BarcodeType;
 
 /**
  * Created by ganymed on 06/12/16.
@@ -27,7 +29,7 @@ import net.dankito.barcode.util.BarcodeType;
 
 public class GenerateBarcodeFragment extends Fragment {
 
-  protected BarcodeGenerator barcodeGenerator = new BarcodeGenerator();
+  protected BarcodeGenerator barcodeGenerator = new BarcodeGeneratorAndroid();
 
   protected ImageView imgGeneratedBarcode;
 
@@ -77,7 +79,8 @@ public class GenerateBarcodeFragment extends Fragment {
     BarcodeGenerationResult generationResult = barcodeGenerator.generateQRCode(options);
 
     if(generationResult.isSuccessful()) {
-      imgGeneratedBarcode.setImageBitmap(generationResult.getGeneratedBarcode());
+      Bitmap bitmap = (Bitmap)generationResult.getGeneratedBarcode();
+      imgGeneratedBarcode.setImageBitmap(bitmap);
       hideSoftKeyboard();
     }
     else {

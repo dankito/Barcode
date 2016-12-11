@@ -1,6 +1,4 @@
-package net.dankito.barcode.util;
-
-import android.graphics.Bitmap;
+package net.dankito.barcode;
 
 /**
  * Created by ganymed on 07/12/16.
@@ -12,7 +10,7 @@ public class BarcodeGenerationResult {
 
   protected String error;
 
-  protected Bitmap generatedBarcode;
+  protected Object generatedBarcode;
 
 
   public BarcodeGenerationResult(String error) {
@@ -20,7 +18,7 @@ public class BarcodeGenerationResult {
     this.isSuccessful = false;
   }
 
-  public BarcodeGenerationResult(Bitmap generatedBarcode) {
+  public BarcodeGenerationResult(Object generatedBarcode) {
     this.generatedBarcode = generatedBarcode;
     this.isSuccessful = true;
   }
@@ -34,7 +32,7 @@ public class BarcodeGenerationResult {
     return error;
   }
 
-  public Bitmap getGeneratedBarcode() {
+  public Object getGeneratedBarcode() {
     return generatedBarcode;
   }
 
