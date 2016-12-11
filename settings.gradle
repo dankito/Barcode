@@ -1,1 +1,1 @@
-include ':BarcodeAndroid'
+include ':BarcodeAndroid', ':BarcodeLib'
