@@ -12,7 +12,7 @@ public class BarcodeJavaFxResources {
 
 
   public static ResourceBundle generate() {
-    return new AvoidFxmlLoaderTranslatesResourceKeysResourceBundle(ResourceBundle.getBundle(STRING_RESOURCE_BUNDLE_NAME, new UTF8Control()));
+    return ResourceBundle.getBundle(STRING_RESOURCE_BUNDLE_NAME, new UTF8Control());
   }
 
 }
