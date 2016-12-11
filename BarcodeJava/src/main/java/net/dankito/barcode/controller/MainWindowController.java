@@ -6,7 +6,6 @@ import net.dankito.barcode.BarcodeGenerator;
 import net.dankito.barcode.BarcodeGeneratorJava;
 import net.dankito.barcode.BarcodeType;
 
-import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -87,8 +87,8 @@ public class MainWindowController implements Initializable {
     BarcodeGenerationResult result = barcodeGenerator.generateQRCode(options);
 
     if(result.isSuccessful()) {
-      BufferedImage image = (BufferedImage)result.getGeneratedBarcode();
-//      imgvwGeneratedBarcode.setImage(new WritableImage());
+      Image image = (Image) result.getGeneratedBarcode();
+      imgvwGeneratedBarcode.setImage(image);
     }
   }
 

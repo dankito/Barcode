@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import javafx.embed.swing.SwingFXUtils;
+
 /**
  * Created by ganymed on 11/12/16.
  */
@@ -32,7 +34,7 @@ public class BarcodeGeneratorJava extends BarcodeGenerator {
       }
     }
 
-    return image;
+    return SwingFXUtils.toFXImage(image, null);
   }
 
 }
