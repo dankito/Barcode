@@ -5,6 +5,11 @@ import com.google.zxing.common.BitMatrix;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
+
+import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
 
@@ -13,6 +18,9 @@ import javafx.embed.swing.SwingFXUtils;
  */
 
 public class BarcodeGeneratorJava extends BarcodeGenerator {
+
+  protected static final DateFormat fileDateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM);
+
 
   @Override
   protected Object createBitmap(BarcodeGenerateOptions options, BitMatrix matrix) {
@@ -34,7 +42,21 @@ public class BarcodeGeneratorJava extends BarcodeGenerator {
       }
     }
 
+    sideEffect_WriteToFile(image, options);
+
     return SwingFXUtils.toFXImage(image, null);
+  }
+
+  protected void sideEffect_WriteToFile(BufferedImage image, BarcodeGenerateOptions options) {
+    try {
+      String fileType = "png";
+      String filePath = "Documents/" + fileDateFormat.format(new Date()) + "_" + options.getBarcodeType() + "." + fileType;
+      File outputFile = new File(filePath);
+      outputFile.mkdirs();
+      ImageIO.write(image, fileType, outputFile);
+    } catch(Exception e) {
+
+    }
   }
 
 }
